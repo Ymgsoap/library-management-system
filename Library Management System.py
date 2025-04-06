@@ -117,32 +117,6 @@ class Library:
     def display_members(self):
         return [member.display_info() for member in self.members.values()]
     
-    # Viser en oversigt over alle lånte bøger og hvilke medlemmer der har lånt dem
-    def display_borrowed_books(self):
-        borrowed_info = {} # En tom liste, hvor nøglen bliver bogens titel, og værdien er en liste af medlemmer der har lånt den
-
-        # Gennemgår alle medlemmer i biblioteket
-        for member in self.members.values():
-            # Gennemgår alle bøger som medlemmet har lånt
-            for book in member.borrowed_books:
-                # Hvis bogens titel endnu ikke findes i listen, oprettes den med en tom liste
-                if book.title not in borrowed_info:
-                    borrowed_info[book.title] = []
-                # Tilføjer medlemmets navn til listen af dem, der har lånt denne bog
-                borrowed_info[book.title].append(member.name)
-
-        # Hvis ingen bøger er lånt (ordbogen er tom), returneres en besked
-        if not borrowed_info:
-            return ["No books are currently borrowed."]
-        
-        result = [] # En tom liste, der skal indeholde de endelige output-strenge
-
-        # Gennemgår alle info i borrowed_info for at formatere resultaterne
-        for book_title, borrowers in borrowed_info.items(): 
-            members_str = ", ".join(borrowers) # Laver en streng af alle medlemsnavne adskilt af komma
-            # Tilføjer en formateret streng til resultatlisten
-            result.append(f"'{book_title}' borrowed by: {members_str}")
-        return result # Returnerer den samlede liste af alle bog-låner-informationer
 
 # Hovedfunktionen, hvor programmet starter
 def main():
@@ -162,8 +136,7 @@ def main():
         print("8. Return Book")
         print("9. Display Books")
         print("10. Display Members")
-        print("11. Show Borrowed Books")
-        print("12. Exit")
+        print("11. Exit")
         
         # Spørger brugeren om et valg
         choice = input("Enter choice: ")
@@ -231,14 +204,8 @@ def main():
             for member in library.display_members():
                 print(member) # Udskriver info om hvert medlem
 
-        # Vis alle udlånte bøger, og de medlemmer der har lånt dem
-        elif choice == "11":
-            print("Borrowed Books:")
-            for info in library.display_borrowed_books():
-                print(info)
-
         # Afslut programmet
-        elif choice == "12":
+        elif choice == "11":
             print("Exiting...")
             break # Stopper while-løkken og afslutter programmet
 
