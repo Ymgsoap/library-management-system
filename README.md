@@ -7,7 +7,7 @@ This is a simple command-line Library Management System written in Python. It al
 
 - ----------------------
 
-To get started:
+To get started: (Open Ubuntu)
 
 Step 1: Clone the Repository
 
